@@ -2,8 +2,11 @@
   "apps": [
     {
       "name": "KickerDiscordBot",
-      "script": "bin/environment dist/app.js",
-      "watch": false
+      "script": "dist/app.js",
+      "watch": false,
+      "env": {
+        "DISCORD_KICKER_BOT_ENV": "dev"
+      }
     }
   ],
   "deploy": {
