@@ -14,7 +14,7 @@
       "ssh_options": "StrictHostKeyChecking=no",
       "ref": "origin/master",
       "repo": "git@github.com:observation-point/kicker-bot.git",
-      "path": "~/kicker_bot",
+      "path": "/home/gorod/kicker_bot",
       "pre-setup": "echo 'PRE SETUP'",
       "post-setup": "echo 'POST SETUP'",
       "pre-deploy-local": "echo 'This is a local executed command'",
