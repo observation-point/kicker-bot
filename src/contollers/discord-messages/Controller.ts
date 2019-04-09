@@ -1,5 +1,6 @@
 import { Message } from 'discord.js';
 import { BaseController } from '../../components/controller/BaseController';
+import { User } from '../../services/user/User';
 
 class MessageController extends BaseController {
     public static MESSAGES = {
@@ -19,24 +20,24 @@ class MessageController extends BaseController {
     }
 
     public async actionAddMe(message: Message): Promise<void> {
-        const user = {
-            login: message.author.username.split('.')[0],
-            fullname: message.author.username,
-            avatar: message.author.avatarURL
-        };
+        const user = this.getUser(message);
 
         await message.channel.send(`${user.fullname} joined \`kicker.lan\` - glhf`);
         await message.author.send(`Your auth data: ${user.login}:123456`);
     }
 
     public async actionGetStats(message: Message): Promise<void> {
-        const user = {
-            login: message.author.username.split('.')[0],
+        const user = this.getUser(message);
+
+        await message.channel.send(`${user.fullname} joined \`kicker.lan\` - glhf`);
+    }
+
+    private getUser(message: Message): User {
+        return {
+            login: message.author.username.split('.')[0].toLocaleLowerCase(),
             fullname: message.author.username,
             avatar: message.author.avatarURL
         };
-
-        await message.channel.send(`${user.fullname} joined \`kicker.lan\` - glhf`);
     }
 
     private formatDefaultEmbedMessage(title: string, description: string) {
