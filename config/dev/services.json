@@ -1,0 +1,5 @@
+{
+  "core": {
+    "path": "http://localhost:3000/private/api"
+  }
+}

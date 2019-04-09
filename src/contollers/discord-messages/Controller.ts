@@ -1,5 +1,7 @@
 import { Message } from 'discord.js';
 import { BaseController } from '../../components/controller/BaseController';
+import { CoreServiceWrapper } from '../../services/wrappers/CoreServiceWrapper';
+import { coreService } from '../../services/wrappers';
 import { User } from '../../services/user/User';
 
 class MessageController extends BaseController {
@@ -8,10 +10,14 @@ class MessageController extends BaseController {
         STATS: 'stats',
         HELP: 'help'
     };
+    private coreService: CoreServiceWrapper;
+
+    constructor() {
+        super();
+        this.coreService = coreService;
+    }
 
     public async actionGetHelp(message: Message): Promise<void> {
-        console.log(message.author);
-
         await message.author.send(this.formatDefaultEmbedMessage(
             'Help',
             `* ${MessageController.MESSAGES.ADD_ME} - reg me as kicker user.\n` +
@@ -21,7 +27,11 @@ class MessageController extends BaseController {
 
     public async actionAddMe(message: Message): Promise<void> {
         const user = this.getUser(message);
-
+        try {
+            await this.coreService.createUser(user);
+        } catch (error) {
+            console.log(error);
+        }
         await message.channel.send(`${user.fullname} joined \`kicker.lan\` - glhf`);
         await message.author.send(`Your auth data: ${user.login}:123456`);
     }

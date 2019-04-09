@@ -1,13 +1,9 @@
-import { LoggerFactory, LoggerConfig } from './LoggerFactory';
+import { LoggingConfig } from '../config';
+import { LoggerFactory } from './LoggerFactory';
 import { configLoader } from '../configLoader';
 
-type FullConfig = {
-    application: LoggerConfig;
-    discord: LoggerConfig;
-    access: LoggerConfig;
-};
 
-const config = configLoader.getConfig<FullConfig>('logging');
+const config = configLoader.getConfig<LoggingConfig>('logging');
 
 const AppLogger = LoggerFactory.create(config.application);
 const MainLogger = LoggerFactory.create(config.access);
