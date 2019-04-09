@@ -4,7 +4,7 @@ class ServiceWrapper {
   private http: AxiosInstance;
 
   constructor(baseUrl: string, token?: string) {
-    const headers = token ? { 'assess-token': token}: {};
+    const headers = token ? { 'access-token': token}: {};
     this.http = axios.create({
       baseURL: baseUrl,
       headers
