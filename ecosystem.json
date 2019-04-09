@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "KickerDiscordBot",
-      "script": "dist/app.js",
+      "script": "~/kicker_bot/current/dist/app.js",
       "watch": false
     }
   ],
@@ -14,11 +14,11 @@
       "ssh_options": "StrictHostKeyChecking=no",
       "ref": "origin/master",
       "repo": "git@github.com:observation-point/kicker-bot.git",
-      "path": "/home/gorod/kicker_bot",
+      "path": "~/kicker_bot",
       "pre-setup": "echo 'PRE SETUP'",
       "post-setup": "echo 'POST SETUP'",
       "pre-deploy-local": "echo 'This is a local executed command'",
-      "post-deploy": "bin/build && ~/kicker-bot-env"
+      "post-deploy": "bin/build && ~/kicker-bot-env.sh"
     }
   }
 }
