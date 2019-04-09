@@ -28,12 +28,13 @@ class MessageController extends BaseController {
     public async actionAddMe(message: Message): Promise<void> {
         const user = this.getUser(message);
         try {
-            await this.coreService.createUser(user);
+            const result = await this.coreService.createUser(user);
+            await message.channel.send(`${user.fullname} joined \`kicker.lan\` - glhf`);
+            await message.author.send(`Your auth data: ${user.login}:${result.password}`);
         } catch (error) {
             console.log(error);
+            await message.channel.send(`${user.fullname} already \`kicker.lan\` member!`);
         }
-        await message.channel.send(`${user.fullname} joined \`kicker.lan\` - glhf`);
-        await message.author.send(`Your auth data: ${user.login}:123456`);
     }
 
     public async actionGetStats(message: Message): Promise<void> {
@@ -44,7 +45,7 @@ class MessageController extends BaseController {
 
     private getUser(message: Message): User {
         return {
-            login: message.author.username.split('.')[0].toLocaleLowerCase(),
+            login: message.author.username.split(' ')[0].toLocaleLowerCase(),
             fullname: message.author.username,
             avatar: message.author.avatarURL
         };
