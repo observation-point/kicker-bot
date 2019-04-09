@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "KickerDiscordBot",
-      "script": "~/kicker_bot/current/dist/app.js",
+      "script": "/home/gorod/kicker_bot/current/dist/app.js",
       "watch": false
     }
   ],
