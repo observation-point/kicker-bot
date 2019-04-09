@@ -1,0 +1,24 @@
+{
+  "apps": [
+    {
+      "name": "KickerDiscordBot",
+      "script": "bin/environment dist/app.js",
+      "watch": false
+    }
+  ],
+  "deploy": {
+    "prod": {
+      "key": "~/.ssh/id_rsa",
+      "user": "gorod",
+      "host": ["www109.lan"],
+      "ssh_options": "StrictHostKeyChecking=no",
+      "ref": "origin/master",
+      "repo": "git@github.com:observation-point/kicker-bot.git",
+      "path": "/home/gorod/kicker_bot",
+      "pre-setup": "echo 'PRE SETUP'",
+      "post-setup": "echo 'POST SETUP'",
+      "pre-deploy-local": "echo 'This is a local executed command'",
+      "post-deploy": "bin/build && pm2 start ecosystem.json --env dev"
+    }
+  }
+}

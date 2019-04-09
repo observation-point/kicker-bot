@@ -11,7 +11,8 @@
     "start": "bin/environment node dist/app.js | pino-pretty -t -c",
     "start-dev": "bin/environment node_modules/.bin/nodemon dist/app.js | pino-pretty -t -c",
     "compile": "rm -rf dist && ./node_modules/.bin/tsc",
-    "compile-dev": "rm -rf dist && ./node_modules/.bin/tsc --watch"
+    "compile-dev": "rm -rf dist && ./node_modules/.bin/tsc --watch",
+    "deploy": "pm2 deploy ecosystem.json prod"
   },
   "dependencies": {
     "@types/minimist": "^1.2.0",
