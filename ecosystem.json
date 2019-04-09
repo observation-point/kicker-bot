@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "KickerDiscordBot",
-      "interpreter": "bin/environment node",
+      "interpreter": "/opt/environment node",
       "script": "dist/app.js",
       "watch": false,
       "env": {
