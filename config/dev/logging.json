@@ -1,0 +1,14 @@
+{
+    "application": {
+      "level": "info",
+      "name": "application"
+    },
+    "discord": {
+      "level": "info",
+      "name": "access"
+    },
+    "access": {
+      "level": "info",
+      "name": "access"
+    }
+  }

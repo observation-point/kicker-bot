@@ -1,0 +1,18 @@
+#!/bin/bash
+# @params {boolean} include_dev_deps
+
+set -e
+
+scriptpath=$(dirname $0)
+cd $scriptpath/../
+
+if [ "$include_dev_deps" = "true" ] || [ -z "$include_dev_deps" ]; then
+    echo "[BUILD] Installing dependencies"
+    yarn install --force --pure-lockfile
+else
+    echo "[BUILD] Installing dependencies with production env"
+    yarn install --force --pure-lockfile --production
+fi
+
+echo "[Build] Compiling project"
+yarn run compile

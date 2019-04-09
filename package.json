@@ -1,0 +1,37 @@
+{
+  "name": "discord-kicker-bot",
+  "version": "1.0.0",
+  "description": "Kicker bot",
+  "main": "dist/app.js",
+  "repository": "https://github.com/observation-point/kicker-bot",
+  "author": "deziev",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "bin/environment node dist/app.js | pino-pretty -t -c",
+    "start-dev": "bin/environment node_modules/.bin/nodemon dist/app.js | pino-pretty -t -c",
+    "compile": "rm -rf dist && ./node_modules/.bin/tsc",
+    "compile-dev": "rm -rf dist && ./node_modules/.bin/tsc --watch"
+  },
+  "dependencies": {
+    "@types/minimist": "^1.2.0",
+    "@types/node": "10.5.3",
+    "@types/pino": "5.8.1",
+    "@types/prettyjson": "0.0.28",
+    "axios": "0.18.0",
+    "discord.js": "11.3.2",
+    "minimist": "1.2.0",
+    "pino": "5.8.0",
+    "prettyjson": "1.2.1",
+    "redis": "2.8.0",
+    "reflect-metadata": "^0.1.12",
+    "routing-controllers": "0.7.7",
+    "source-map-support": "0.5.6",
+    "typescript": "2.9.1"
+  },
+  "devDependencies": {
+    "nodemon": "1.18.3",
+    "pino-pretty": "2.6.0",
+    "tslint": "5.11.0"
+  }
+}
