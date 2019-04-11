@@ -29,11 +29,11 @@ class MessageController extends BaseController {
         const user = this.getUser(message);
         try {
             const result = await this.coreService.createUser(user);
-            await message.channel.send(`${user.fullname} joined \`kicker.lan\` - glhf`);
+            await message.channel.send(`${user.fullname} joined http://kicker.lan - glhf`);
             await message.author.send(`Your auth data: ${user.login}:${result.user.password}`);
         } catch (error) {
             console.log(error);
-            await message.channel.send(`${user.fullname} already \`kicker.lan\` member!`);
+            await message.channel.send(`${user.fullname} already http://kicker.lan member!`);
         }
     }
 
