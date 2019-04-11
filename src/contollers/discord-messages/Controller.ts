@@ -45,7 +45,7 @@ class MessageController extends BaseController {
 
     private getUser(message: Message): User {
         return {
-            login: message.author.username.split(' ')[0].toLocaleLowerCase(),
+            login: message.author.username.toLocaleLowerCase().split(' ').join('_'),
             fullname: message.author.username,
             avatar: message.author.avatarURL
         };
