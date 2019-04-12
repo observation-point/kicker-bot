@@ -24,7 +24,7 @@ class DiscordService {
     }
   }
 
-  public createStatisticsMessage(user: { login: string; avatar?: string; }, rawData: UserStats) {
+  public createStatisticsMessage(user: { login: string; }, rawData: UserStats) {
     const winCount = rawData.winsInAttack + rawData.winsInDefense;
     const lossCount = rawData.gamesCount - winCount;
     return {
@@ -40,7 +40,7 @@ class DiscordService {
         },
         author: {
           name: user.login,
-          icon_url: user.avatar || DiscordService.DEFAULT_AVATAR_URL
+          icon_url: rawData.avatar || DiscordService.DEFAULT_AVATAR_URL
         },
         fields: [
           {
