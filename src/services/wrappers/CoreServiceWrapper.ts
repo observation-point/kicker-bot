@@ -1,4 +1,4 @@
-import { UserCreation } from '@kicker/core';
+import { UserCreation, UserStats } from '@kicker/core';
 import { ServiceWrapper } from '../../components/restClient/ServiceWrapper';
 
 class CoreServiceWrapper extends ServiceWrapper {
@@ -6,6 +6,10 @@ class CoreServiceWrapper extends ServiceWrapper {
         userCreateData: { login: string; fullname: string; avatar?: string; }
     ): Promise<UserCreation> {
         return await this.post<UserCreation>('/user', userCreateData);
+    }
+
+    public async getStats(userLogin: string): Promise<UserStats> {
+        return await this.get<UserStats>('/user/stats', { login: userLogin });
     }
 }
 

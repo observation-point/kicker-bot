@@ -2,7 +2,7 @@ import { Message } from 'discord.js';
 import { BaseController } from '../../components/controller/BaseController';
 import { CoreServiceWrapper } from '../../services/wrappers/CoreServiceWrapper';
 import { coreService } from '../../services/wrappers';
-import { User } from '../../services/user/User';
+import { DiscordService } from '../../services/discord/DiscordService';
 
 class MessageController extends BaseController {
     public static MESSAGES = {
@@ -11,14 +11,16 @@ class MessageController extends BaseController {
         HELP: 'help'
     };
     private coreService: CoreServiceWrapper;
+    private discordService: DiscordService;
 
     constructor() {
         super();
         this.coreService = coreService;
+        this.discordService = new DiscordService();
     }
 
     public async actionGetHelp(message: Message): Promise<void> {
-        await message.author.send(this.formatDefaultEmbedMessage(
+        await message.author.send(this.discordService.createDefaultEmbedMessage(
             'Help',
             `* ${MessageController.MESSAGES.ADD_ME} - reg me as kicker user.\n` +
             `* ${MessageController.MESSAGES.STATS} - get stats.\n`
@@ -26,7 +28,7 @@ class MessageController extends BaseController {
     }
 
     public async actionAddMe(message: Message): Promise<void> {
-        const user = this.getUser(message);
+        const user = this.discordService.getUser(message);
         try {
             const result = await this.coreService.createUser(user);
             await message.channel.send(`${user.fullname} joined http://kicker.lan - glhf`);
@@ -39,26 +41,14 @@ class MessageController extends BaseController {
     }
 
     public async actionGetStats(message: Message): Promise<void> {
-        const user = this.getUser(message);
-
-        await message.channel.send(`${user.fullname} joined \`kicker.lan\` - glhf`);
-    }
-
-    private getUser(message: Message): User {
-        return {
-            login: message.author.username.toLocaleLowerCase().split(' ').join('_'),
-            fullname: message.author.username,
-            avatar: message.author.avatarURL
-        };
-    }
-
-    private formatDefaultEmbedMessage(title: string, description: string) {
-        return {
-            embed: {
-                title,
-                description,
-                color: 14177041
-            }
+        const userLogin = message.content.split(' ')[2];
+        const user = userLogin ? { login: userLogin } :  this.discordService.getUser(message);
+        try {
+            const stats = await this.coreService.getStats(user.login);
+            await message.channel.send(this.discordService.createStatisticsMessage(user, stats));
+        } catch (error) {
+            console.error(error);
+            await message.channel.send(`__${userLogin}__ not found!`);
         }
     }
 }

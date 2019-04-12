@@ -5,7 +5,17 @@ declare module '@kicker/core' {
     fullname: string;
     avatar?: string;
     password: string;
-    token?: string; 
+    token?: string;
+  };
+
+  export type UserStats = {
+    userId: string;
+    avatar: string;
+    fullname: string;
+    rating: number;
+    gamesCount: number;
+    winsInAttack: number;
+    winsInDefense: number;
   };
 
   export type UserCreation = {
