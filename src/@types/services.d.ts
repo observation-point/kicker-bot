@@ -5,6 +5,7 @@ declare module '@kicker/core' {
     fullname: string;
     avatar?: string;
     password: string;
+    token?: string; 
   };
 
   export type UserCreation = {
