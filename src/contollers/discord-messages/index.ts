@@ -8,3 +8,4 @@ export const messageHandler = new MessageHandler();
 
 messageHandler.on(supportedMessages.HELP, messageController.actionGetHelp);
 messageHandler.on(supportedMessages.ADD_ME, messageController.actionAddMe);
+messageHandler.on(supportedMessages.STATS, messageController.actionGetStats);
