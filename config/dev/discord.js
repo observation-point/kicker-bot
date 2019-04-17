@@ -1,4 +1,4 @@
 module.exports = {
-    "name": "kicker-bot",
+    "name": "!kb",
     "token": process.env.KICKER_BOT_TOKEN
 }
