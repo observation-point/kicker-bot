@@ -6,7 +6,7 @@ import { DiscordService } from '../../services/discord/DiscordService';
 
 class MessageController extends BaseController {
     public static MESSAGES = {
-        ADD_ME: 'add-me',
+        ADD_ME: 'add',
         STATS: 'stats',
         HELP: 'help'
     };
@@ -31,8 +31,12 @@ class MessageController extends BaseController {
         const user = this.discordService.getUser(message);
         try {
             const result = await this.coreService.createUser(user);
-            await message.channel.send(`${user.fullname} joined http://kicker.lan - glhf`);
-            await message.author.send(`Your auth data: ${user.login}:${result.user.password}`);
+            if (result.user.password) {
+                await message.channel.send(`${user.fullname} joined http://kicker.lan - glhf`);
+                await message.author.send(`Your auth data: ${user.login}:${result.user.password}`);
+            } else {
+                await message.channel.send(`${user.fullname} already http://kicker.lan member!`);
+            }
             await message.author.send(`Yout link to join: http://kicker.lan/token/${result.user.token}`);
         } catch (error) {
             console.log(error);
