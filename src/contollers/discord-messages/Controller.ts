@@ -32,15 +32,15 @@ class MessageController extends BaseController {
         try {
             const result = await this.coreService.createUser(user);
             if (result.user.password) {
-                await message.channel.send(`${user.fullname} joined https://kicker.aventica.site - glhf`);
+                await message.channel.send(`${user.fullname} joined https://kicker.lan - glhf`);
                 await message.author.send(`Your auth data: ${user.login}:${result.user.password}`);
             } else {
-                await message.channel.send(`${user.fullname} already https://kicker.aventica.site member!`);
+                await message.channel.send(`${user.fullname} already https://kicker.lan member!`);
             }
-            await message.author.send(`Yout link to join: https://kicker.aventica.site/token/${result.user.token}`);
+            await message.author.send(`Yout link to join: https://kicker.lan/token/${result.user.token}`);
         } catch (error) {
             console.log(error);
-            await message.channel.send(`${user.fullname} already https://kicker.aventica.site member!`);
+            await message.channel.send(`${user.fullname} already https://kicker.lan member!`);
         }
     }
 
