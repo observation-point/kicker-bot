@@ -1,0 +1,26 @@
+{
+  "extends": ["tslint-config-airbnb"],
+  "rules": {
+    "member-access": true,
+    "member-ordering": [
+      true,
+      {
+        "order": "fields-first"
+      }
+    ],
+    "no-trailing-whitespace": false,
+    "variable-name": [
+      true,
+      "ban-keywords",
+      "check-format",
+      "allow-trailing-underscore",
+      "allow-pascal-case",
+      "allow-leading-underscore"
+    ],
+    "max-line-length": [
+      true,
+      120
+    ],
+    "trailing-comma": [false]
+  }
+}
