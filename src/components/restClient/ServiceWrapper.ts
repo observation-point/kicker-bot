@@ -4,10 +4,10 @@ class ServiceWrapper {
   private http: AxiosInstance;
 
   constructor(baseUrl: string, token?: string) {
-    const headers = token ? { 'access-token': token}: {};
+    const headers = token ? { 'access-token': token } : {};
     this.http = axios.create({
+      headers,
       baseURL: baseUrl,
-      headers
     });
   }
 

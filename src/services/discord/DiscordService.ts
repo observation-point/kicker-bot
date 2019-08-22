@@ -1,4 +1,4 @@
-import { Message } from 'discord.js'
+import { Message } from 'discord.js';
 import { UserStats } from '@kicker/core';
 import { round } from '../../components/utils/math';
 import { User } from '../user/User';
@@ -17,26 +17,27 @@ class DiscordService {
   public createDefaultEmbedMessage(title: string, description: string) {
     return {
       embed: {
-          title,
-          description,
-          color: 14177041
+        title,
+        description,
+        color: 14177041
       }
-    }
+    };
   }
 
   public createStatisticsMessage(user: { login: string; }, rawData: UserStats) {
     const winCount = rawData.winsInAttack + rawData.winsInDefense;
     const lossCount = rawData.gamesCount - winCount;
+    const winrate = round((winCount / (lossCount || 1)) * 100, 2);
     return {
       embed: {
-        description: "Ranked information",
+        description: 'Ranked information',
         color: 12026300,
         timestamp: new Date(),
         footer: {
-          text: "Play ranked games with kicker.lan"
+          text: 'Play ranked games with kicker.lan'
         },
         thumbnail: {
-          url: "https://cdn.discordapp.com/embed/avatars/0.png"
+          url: 'https://cdn.discordapp.com/embed/avatars/0.png'
         },
         author: {
           name: user.login,
@@ -44,18 +45,19 @@ class DiscordService {
         },
         fields: [
           {
-            name: "Rank",
+            name: 'Rank',
             value: `${rawData.rating}`,
             inline: true
           },
           {
-            name: "Statistics",
-            value: `**Win:** ${winCount} - **Loss:** ${lossCount}\n**Win Rate:** ${round((winCount/(lossCount || 1))*100, 2)}%`,
+            name: 'Statistics',
+            value:
+              `**Win:** ${winCount} - **Loss:** ${lossCount}\n**Win Rate:** ${winrate}%`,
             inline: true
           },
           {
-            name: "Game",
-            value: `**A/D:** ${round(rawData.winsInAttack/(rawData.winsInDefense || 1), 2)}`
+            name: 'Game',
+            value: `**A/D:** ${round(rawData.winsInAttack / (rawData.winsInDefense || 1), 2)}`
           }
         ]
       }

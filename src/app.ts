@@ -6,6 +6,5 @@ import { messageHandler } from './contollers/discord-messages';
 const botConfig = configLoader.getConfig<DiscordConfig>('discord');
 const discordClient = new DiscordClientWrapper(botConfig.token, botConfig.name);
 
-
 discordClient.use(messageHandler);
 discordClient.initClient();
