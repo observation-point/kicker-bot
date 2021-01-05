@@ -20,7 +20,7 @@
     "@types/node": "10.5.3",
     "@types/pino": "5.8.1",
     "@types/prettyjson": "0.0.28",
-    "axios": "0.18.1",
+    "axios": "0.21.1",
     "discord.js": "11.3.2",
     "minimist": "1.2.0",
     "pino": "5.8.0",
